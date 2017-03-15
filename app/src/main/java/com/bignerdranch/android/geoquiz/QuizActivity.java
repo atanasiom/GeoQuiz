@@ -8,10 +8,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class QuizActivity extends AppCompatActivity {
-
+	
 	private Button mTrueButton;
 	private Button mFalseButton;
 	private Button mNextButton;
+	private Button mPrevButton;
 	private TextView mQuestionTextView;
 	private Question[] mQuestionBank = new Question[]{new Question(R.string.question_oceans, true), new Question(R
 			.string.question_mideast, false), new Question(R.string.question_africa, false), new Question(R.string
@@ -47,6 +48,15 @@ public class QuizActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View v) {
 				mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+				updateQuestion();
+			}
+		});
+
+		mPrevButton = (Button) findViewById(R.id.prev_button);
+		mPrevButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mCurrentIndex = Math.abs((mCurrentIndex + 1) % mQuestionBank.length);
 				updateQuestion();
 			}
 		});
